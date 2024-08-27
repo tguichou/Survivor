@@ -25,26 +25,27 @@
     <button id="save-theo-btn">Enregistrer pour Théo</button>
     <button id="save-francois-btn">Enregistrer pour François</button>
     <div id="message"></div>
-<!-- Firebase App (the core Firebase SDK) -->
-<script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js"></script>
-<!-- Firebase Realtime Database SDK -->
-<script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js"></script>
-<script>
-    // Votre configuration Firebase
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js"></script>
+    <!-- Firebase Realtime Database SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js"></script>
+
+    <script>
+    // Configuration Firebase
     const firebaseConfig = {
-  apiKey: "AIzaSyA31yPEPp1Jwaf05UVUOggmIy7LbPy4Zc4",
-  authDomain: "survivor-ab94a.firebaseapp.com",
-  projectId: "survivor-ab94a",
-  storageBucket: "survivor-ab94a.appspot.com",
-  messagingSenderId: "302318953656",
-  appId: "1:302318953656:web:a0fbab8e4bb48566ca404d",
-  measurementId: "G-1KNWX1BSH3"
-};
+        apiKey: "AIzaSyA31yPEPp1Jwaf05UVUOggmIy7LbPy4Zc4",
+        authDomain: "survivor-ab94a.firebaseapp.com",
+        databaseURL: "https://survivor-ab94a-default-rtdb.firebaseio.com/",
+        projectId: "survivor-ab94a",
+        storageBucket: "survivor-ab94a.appspot.com",
+        messagingSenderId: "302318953656",
+        appId: "1:302318953656:web:a0fbab8e4bb48566ca404d"
+    };
+
     // Initialiser Firebase
     const app = firebase.initializeApp(firebaseConfig);
     const database = firebase.database();
-</script>
-
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
