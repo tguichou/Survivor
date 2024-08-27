@@ -22,6 +22,15 @@ const clubsLigue1 = [
     "AJ Auxerre"
 ];
 
+// Remplir la liste déroulante avec les clubs
+const clubSelect = document.getElementById('club-select');
+clubsLigue1.forEach(club => {
+    const option = document.createElement('option');
+    option.value = club;
+    option.textContent = club;
+    clubSelect.appendChild(option);
+});
+
 // Fonction pour vérifier si le club est valide
 function isClubValid(club) {
     return clubsLigue1.includes(club);
@@ -29,7 +38,6 @@ function isClubValid(club) {
 
 // Gestionnaire de l'événement click sur le bouton Enregistrer
 document.getElementById('save-btn').addEventListener('click', function() {
-    const clubInput = document.getElementById('club-input').value;
     const password = prompt("Entrez le mot de passe");
 
     if (password !== "Apéro") {
@@ -37,12 +45,40 @@ document.getElementById('save-btn').addEventListener('click', function() {
         return;
     }
 
-    if (isClubValid(clubInput)) {
-        document.getElementById('message').textContent = `Club "${clubInput}" enregistré avec succès !`;
+    let validationSuccess = true;
+    let message = "";
+
+    // Valider les clubs sélectionnés pour Théo
+    document.querySelectorAll('.input-theo').forEach((input, index) => {
+        if (!isClubValid(input.value)) {
+            validationSuccess = false;
+            message += `Journée ${index + 1} - Théo : Club invalide.\n`;
+        }
+    });
+
+    // Valider les clubs sélectionnés pour François
+    document.querySelectorAll('.input-francois').forEach((input, index) => {
+        if (!isClubValid(input.value)) {
+            validationSuccess = false;
+            message += `Journée ${index + 1} - François : Club invalide.\n`;
+        }
+    });
+
+    if (validationSuccess) {
+        document.getElementById('message').textContent = "Les clubs ont été enregistrés avec succès !";
         document.getElementById('message').style.color = "green";
-        // Ici vous pouvez ajouter le code pour sauvegarder le club (par exemple, en utilisant localStorage ou en l'envoyant à un serveur)
     } else {
-        document.getElementById('message').textContent = "Nom de club invalide.";
+        document.getElementById('message').textContent = message;
         document.getElementById('message').style.color = "red";
     }
+});
+
+// Écouter la sélection de club dans la liste déroulante
+clubSelect.addEventListener('change', function() {
+    const selectedClub = this.value;
+    document.querySelectorAll('.input-theo, .input-francois').forEach(input => {
+        if (input.value === "") {
+            input.value = selectedClub;
+        }
+    });
 });
