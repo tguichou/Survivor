@@ -7,13 +7,61 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Enregistrer un club de Ligue 1</h1>
-    
+    <h1>Enregistrer les clubs pour chaque journée</h1>
+
+    <!-- Section pour la liste déroulante -->
     <div id="form-container">
-        <input type="text" id="club-input" placeholder="Entrez le nom du club">
-        <button id="save-btn">Enregistrer</button>
-        <div id="message"></div>
+        <label for="club-select">Sélectionnez un club :</label>
+        <select id="club-select">
+            <option value="">--Choisissez un club--</option>
+            <!-- Les options seront ajoutées dynamiquement via JavaScript -->
+        </select>
     </div>
+
+    <!-- Section pour les colonnes Théo et François -->
+    <div id="journees">
+        <!-- Première journée -->
+        <div class="journee">
+            <h2>Journée 1</h2>
+            <div class="colonne">
+                <label for="theo-j1">Théo :</label>
+                <input type="text" id="theo-j1" class="input-theo">
+            </div>
+            <div class="colonne">
+                <label for="francois-j1">François :</label>
+                <input type="text" id="francois-j1" class="input-francois">
+            </div>
+        </div>
+
+        <!-- Deuxième journée -->
+        <div class="journee">
+            <h2>Journée 2</h2>
+            <div class="colonne">
+                <label for="theo-j2">Théo :</label>
+                <input type="text" id="theo-j2" class="input-theo">
+            </div>
+            <div class="colonne">
+                <label for="francois-j2">François :</label>
+                <input type="text" id="francois-j2" class="input-francois">
+            </div>
+        </div>
+
+        <!-- Troisième journée -->
+        <div class="journee">
+            <h2>Journée 3</h2>
+            <div class="colonne">
+                <label for="theo-j3">Théo :</label>
+                <input type="text" id="theo-j3" class="input-theo">
+            </div>
+            <div class="colonne">
+                <label for="francois-j3">François :</label>
+                <input type="text" id="francois-j3" class="input-francois">
+            </div>
+        </div>
+    </div>
+
+    <button id="save-btn">Enregistrer</button>
+    <div id="message"></div>
 
     <script src="script.js"></script>
 </body>
