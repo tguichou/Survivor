@@ -65,11 +65,11 @@ function generateTable() {
         tbody.appendChild(row);
     }
 
-    // Charger les données sauvegardées
+    // Charger les données sauvegardées depuis Firebase
     loadSavedData();
 }
 
-// Fonction pour sauvegarder les choix
+// Fonction pour sauvegarder les choix dans Firebase
 function saveChoices(player) {
     const password = prompt(`Entrez le mot de passe pour ${player}`);
     const correctPassword = player === 'Théo' ? '123' : '456';
@@ -83,28 +83,34 @@ function saveChoices(player) {
     for (let i = 1; i <= journees; i++) {
         const selectId = player === 'Théo' ? `theo-j${i}` : `francois-j${i}`;
         const selectedClub = document.getElementById(selectId).value;
-        localStorage.setItem(`${player.toLowerCase()}-j${i}`, selectedClub);
+        
+        // Sauvegarder dans Firebase
+        firebase.database().ref(`${player.toLowerCase()}/j${i}`).set(selectedClub);
     }
 
     document.getElementById('message').textContent = `${player} a enregistré ses choix avec succès !`;
     document.getElementById('message').style.color = "green";
 }
 
-// Fonction pour charger les données sauvegardées
+// Fonction pour charger les données sauvegardées depuis Firebase
 function loadSavedData() {
     for (let i = 1; i <= journees; i++) {
         const theoSelect = document.getElementById(`theo-j${i}`);
         const francoisSelect = document.getElementById(`francois-j${i}`);
 
-        const savedTheoClub = localStorage.getItem(`theo-j${i}`);
-        const savedFrancoisClub = localStorage.getItem(`francois-j${i}`);
+        firebase.database().ref(`theo/j${i}`).once('value', (snapshot) => {
+            const savedTheoClub = snapshot.val();
+            if (savedTheoClub) {
+                theoSelect.value = savedTheoClub;
+            }
+        });
 
-        if (savedTheoClub) {
-            theoSelect.value = savedTheoClub;
-        }
-        if (savedFrancoisClub) {
-            francoisSelect.value = savedFrancoisClub;
-        }
+        firebase.database().ref(`francois/j${i}`).once('value', (snapshot) => {
+            const savedFrancoisClub = snapshot.val();
+            if (savedFrancoisClub) {
+                francoisSelect.value = savedFrancoisClub;
+            }
+        });
     }
 }
 
